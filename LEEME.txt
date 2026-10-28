@@ -1,0 +1,22 @@
+OTRA MIRADA — versión 3
+
+CÓMO ABRIR
+1. Descomprimí OTRA_MIRADA_v3.zip.
+2. Abrí la carpeta OTRA_MIRADA_v3.
+3. Hacé doble clic en index.html para abrirlo en Safari o Chrome.
+4. Mantené index.html junto a la carpeta assets. No abras el HTML anterior.
+No requiere instalar programas. Las fuentes de Google requieren internet; sin conexión se usa una fuente alternativa.
+
+CAMBIOS
+Logo y navegación separados del titular.
+Doce imágenes reconstruidas con IA: horizontales exportadas a 1920x1080; retratos de 1920 px de alto.
+Armazones antes monocromáticos: versión en color cálido.
+Tres escenas fotográficas sincronizadas con el scroll: marco, cristales separados, anteojos montados.
+Carrete horizontal táctil en pantallas pequeñas. Respeta la preferencia de movimiento reducido.
+Plazos de stock y laboratorio diferenciados.
+
+ALCANCE
+Las imágenes son reconstrucciones conceptuales, no recuperación exacta del original ni fotografías de stock comercial disponible. La exportación incluye reescalado desde las generaciones.
+El scroll cambia entre fotografías con transiciones; no es un modelo 3D de desarme continuo.
+Verificado en Chromium y composición de 390 px. Safari debe revisarse en tu Mac.
+Para un desarme continuo, el siguiente paso es crear un modelo del mismo armazón con sus lentes separados o una secuencia de renders coherente.
