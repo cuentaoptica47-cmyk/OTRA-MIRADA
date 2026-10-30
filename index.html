@@ -75,6 +75,53 @@ nav{height:96px;background:linear-gradient(#080b13d9,transparent);padding-block:
 @media(max-width:950px){.style-card{flex-basis:calc((100% - 24px)/3)}}
 @media(max-width:600px){.style-card{flex-basis:76%}}
 @media(prefers-reduced-motion:reduce){.portrait{transition:none}}
+
+/* v5 — expressive type scale inspired by Problem Studio */
+.wrap{width:min(1680px,calc(100% - 6vw))}
+.hero h1{font-size:clamp(96px,12.7vw,200px);line-height:.82;max-width:1000px}
+.hero-content{padding-top:130px;padding-bottom:85px;min-height:800px}
+.hero-lead{font-size:clamp(18px,1.8vw,26px);max-width:480px}
+.intro{display:block;padding:65px 0 48px}
+.intro h2{font-size:clamp(52px,9.2vw,154px);line-height:.91;letter-spacing:-.075em;margin:18px 0 24px}
+.intro p{font-size:clamp(18px,1.8vw,26px);line-height:1.45;max-width:760px;margin:0 0 0 auto}
+.gallery{padding:65px 0}
+.gallery .section-head{display:block;margin-bottom:28px}
+.gallery .section-head h2{font-size:clamp(56px,9.5vw,160px);line-height:.9;margin:16px 0 24px}
+.gallery .section-head p{font-size:clamp(18px,1.65vw,24px);line-height:1.45;max-width:720px;margin:0 0 0 auto}
+.stage-copy{width:44%;max-width:720px}
+.stage-copy h3{font-size:clamp(48px,6.7vw,108px);line-height:.92}
+.stage-copy p{font-size:clamp(18px,1.65vw,24px);line-height:1.45;max-width:450px}
+.story-card h2{font-size:clamp(30px,3vw,50px);line-height:.96}
+.story-card p{font-size:16px}
+.tech{min-height:680px;padding-block:55px}
+.tech h2{font-size:clamp(64px,9.4vw,154px);line-height:.88;margin:22px 0;max-width:1000px}
+.tech p{font-size:clamp(18px,1.65vw,24px);line-height:1.45;max-width:600px}
+.editorial-service{padding:50px clamp(28px,4vw,65px)}
+.editorial-service h2{font-size:clamp(54px,6.8vw,112px);line-height:.9}
+.editorial-words h2{font-size:clamp(58px,7.5vw,124px);line-height:.9}
+.editorial-words p{font-size:18px;line-height:1.45;max-width:430px}
+.steps li{font-size:17px;line-height:1.4}.steps{gap:20px}
+.faq{padding:65px 0;gap:5vw;grid-template-columns:1fr 1fr}
+.faq h2{font-size:clamp(64px,8.5vw,140px);line-height:.9}
+.faq>div>p,.faq-items p{font-size:18px;line-height:1.5}.faq-items summary{font-size:20px}
+.cta{padding:75px 0}.cta h2{font-size:clamp(76px,12.5vw,200px);max-width:1500px;line-height:.86;margin:22px auto 28px}
+.cta p{font-size:clamp(19px,1.8vw,26px)}
+@media(max-width:950px){.hero h1{font-size:14vw}.stage-copy{width:48%}.editorial-service h2,.editorial-words h2{font-size:clamp(68px,10vw,100px)}.faq{grid-template-columns:1fr}.faq>div>p{max-width:600px}}
+@media(max-width:600px){
+.wrap{width:calc(100% - 36px)}
+.hero-content{padding-top:285px;padding-bottom:86px;min-height:760px}.hero{min-height:760px}
+.hero h1{font-size:clamp(62px,20vw,112px);line-height:.86;margin:18px 0 22px}
+.hero-lead{font-size:18px;max-width:340px}
+.intro{padding:44px 0 36px}.intro h2{font-size:clamp(38px,10.3vw,62px);line-height:.96;letter-spacing:-.065em}
+.intro p,.gallery .section-head p{font-size:18px;line-height:1.45;margin:0;max-width:none}
+.gallery{padding:42px 0}.gallery .section-head h2{font-size:clamp(44px,12.2vw,73px);line-height:.94;letter-spacing:-.065em}
+.stage-copy{width:calc(100% - 54px);left:18px;bottom:50px}.stage-copy h3{font-size:clamp(42px,12vw,65px);line-height:.95;margin:12px 0}.stage-copy p{font-size:16px;line-height:1.4;max-width:340px}
+.tech{min-height:680px;padding:40px 0}.tech h2{font-size:clamp(54px,16vw,96px);line-height:.92}.tech p{font-size:18px}
+.editorial-service{padding:40px 22px}.editorial-service h2{font-size:clamp(54px,15vw,88px)}
+.editorial-words h2{font-size:clamp(60px,17vw,96px)}.editorial-words p{font-size:17px}.editorial-words{left:6%;max-width:88%}
+.steps li{font-size:16px}.faq{padding:44px 0;gap:10px}.faq h2{font-size:clamp(64px,19vw,110px)}.faq-items summary{font-size:18px}
+.cta{padding:52px 0}.cta h2{font-size:clamp(55px,15.5vw,92px);letter-spacing:-.075em;line-height:.94}.cta p{font-size:19px}
+}
 </style>
 </head>
 <body>
