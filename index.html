@@ -122,6 +122,12 @@ nav{height:96px;background:linear-gradient(#080b13d9,transparent);padding-block:
 .steps li{font-size:16px}.faq{padding:44px 0;gap:10px}.faq h2{font-size:clamp(64px,19vw,110px)}.faq-items summary{font-size:18px}
 .cta{padding:52px 0}.cta h2{font-size:clamp(55px,15.5vw,92px);letter-spacing:-.075em;line-height:.94}.cta p{font-size:19px}
 }
+
+/* Continuous draggable marquee; keyboard focus never traps autoplay. */
+.marquee{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.marquee.is-dragging{cursor:grabbing}
+.marquee .marquee-track{display:flex;width:max-content;will-change:transform}
+.marquee .marquee-group{flex:none;display:block;animation:none!important;padding-right:.35em}
 </style>
 </head>
 <body>
@@ -131,7 +137,7 @@ nav{height:96px;background:linear-gradient(#080b13d9,transparent);padding-block:
 <div class="wrap hero-content"><div class="eyebrow">CRISTALES CON RECETA / GRAN MENDOZA</div><h1><span>VER</span><span>ES <em class="gradient" style="font-style:normal">OTRA</em></span><span class="gradient">COSA.</span></h1><p class="hero-lead">Tu marco favorito. Cristales nuevos.<br>Más claridad. Más color. Más vida.</p><div><a class="pill white" href="#experiencia">DESCUBRÍ CÓMO FUNCIONA ↗</a></div></div>
 <div class="hero-notes"><div class="note"><i>⌂</i>Retiramos tu marco en casa u oficina</div><div class="note"><i>↔</i>Stock: 3 días habituales*</div><div class="note"><i>◉</i>Cristales según tu receta</div></div><div class="scroll-hint"><b>↓</b> DESLIZÁ PARA EXPLORAR</div>
 </header>
-<div class="marquee" tabindex="0" aria-label="Otra Mirada, tus anteojos renovados. Detenemos el movimiento al colocar el cursor encima"><span>OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳ OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳ &nbsp; OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳</span></div>
+<div class="marquee" tabindex="0" role="region" aria-label="Otra Mirada, tus anteojos renovados. Arrastrá hacia ambos lados o usá las flechas del teclado. El movimiento se pausa mientras el cursor está encima."><div class="marquee-track" aria-hidden="true"><span class="marquee-group">OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳ OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳ </span><span class="marquee-group">OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳ OTRA MIRADA ✳ TUS ANTEOJOS, RENOVADOS ✳ </span></div></div>
 <section class="wrap intro reveal"><div><div class="eyebrow accent">01 / LA EXPERIENCIA</div><h2>EL MARCO SE QUEDA.<br><span class="gradient">VOS VES MEJOR.</span></h2></div><p>Conservá los anteojos que te gustan. Nosotros nos encargamos de renovar sus cristales según tu receta. Descubrí cómo una pequeña transformación puede sentirse enorme.</p></section>
 <section class="experience" id="experiencia" aria-label="Experiencia de renovación de cristales"><div class="experience-sticky"><div class="orb"></div><div class="stage-photo" aria-label="Proceso visual de renovación de cristales"><img class="frame-img" src="assets/frame.webp" alt="Armazón de anteojos en primer plano"><img class="lens-img" src="assets/lenses.webp" alt="Cristales ópticos separados del armazón"><img class="final-img" src="assets/assembled.webp" alt="Anteojos con cristales montados"></div><div class="stage-copy"><div class="stage-index" id="stage-number">01 / EL MARCO</div><h3 id="stage-title">TU ESTILO.<br>NUESTRA<br>TECNOLOGÍA.</h3><p id="stage-desc">Conservá el marco que te gusta. Cambiamos solamente los cristales, previa evaluación de compatibilidad.</p></div><div class="stage-progress" aria-hidden="true"><i class="active"></i><i></i><i></i></div><div class="step-chip">DESLIZÁ PARA DESCUBRIR EL PROCESO</div><div class="stage-caption">01 — 03 / UNA NUEVA MIRADA</div><div class="story-progress" aria-hidden="true"></div></div></section>
 <section class="story-strip" aria-label="Tres momentos de una nueva mirada"><article class="story-card"><img src="assets/frame.webp" loading="lazy" alt="Armazón de acetato en primer plano"><div><small>01 / EL MARCO</small><h2>TU ESTILO.<br>NUESTRA PRECISIÓN.</h2><p>Conservá tus anteojos favoritos.</p></div></article><article class="story-card"><img src="assets/lenses.webp" loading="lazy" alt="Cristales ópticos con reflejos azules"><div><small>02 / LOS CRISTALES</small><h2>OTRA FORMA<br>DE VER.</h2><p>Los preparamos según tu receta.</p></div></article><article class="story-card"><img src="assets/assembled.webp" loading="lazy" alt="Anteojos renovados"><div><small>03 / EL RESULTADO</small><h2>TU MARCO.<br>OTRA MIRADA.</h2><p>Tu estilo, con una mirada renovada.</p></div></article></section>
@@ -156,4 +162,60 @@ function schedule(){if(!ticking){ticking=true;requestAnimationFrame(update)}}add
 if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));}else document.querySelectorAll('.reveal').forEach(e=>e.classList.add('visible'));
 })();
 </script>
+<script>
+(()=>{
+ const strip=document.querySelector('.marquee');
+ if(!strip)return;
+ const track=strip.querySelector('.marquee-track');
+ const group=track.firstElementChild;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let width=0,position=0,hovered=false,pointer=null,lastX=0,lastTime=0;
+ const paint=()=>{if(width){position=((position%width)+width)%width;track.style.transform=`translate3d(${-position}px,0,0)`;}};
+ const measure=()=>{
+  width=group.getBoundingClientRect().width;
+  if(width){
+   const count=Math.ceil(strip.clientWidth/width)+1;
+   while(track.children.length<count)track.appendChild(group.cloneNode(true));
+   while(track.children.length>count)track.lastElementChild.remove();
+  }
+  paint();
+ };
+ const sizing=new ResizeObserver(measure);sizing.observe(group);sizing.observe(strip);
+ document.fonts?.ready.then(measure);measure();
+ function frame(time){
+  const elapsed=lastTime?Math.min(time-lastTime,64):0;lastTime=time;
+  if(!document.hidden&&!reduced.matches&&!hovered&&pointer===null){position+=elapsed*.055;paint();}
+  requestAnimationFrame(frame);
+ }
+ requestAnimationFrame(frame);
+ strip.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hovered=true;});
+ strip.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')hovered=false;});
+ strip.addEventListener('pointerdown',e=>{
+  if(pointer!==null||(e.pointerType==='mouse'&&e.button!==0))return;
+  pointer=e.pointerId;lastX=e.clientX;
+  strip.setPointerCapture(pointer);strip.classList.add('is-dragging');
+ });
+ strip.addEventListener('pointermove',e=>{
+  if(e.pointerId!==pointer)return;
+  position-=e.clientX-lastX;lastX=e.clientX;paint();
+ });
+ const release=e=>{
+  if(e.pointerId!==pointer)return;
+  pointer=null;strip.classList.remove('is-dragging');
+  const r=strip.getBoundingClientRect();
+  hovered=e.type!=='pointercancel'&&e.pointerType==='mouse'&&e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;
+  if(strip.hasPointerCapture(e.pointerId))strip.releasePointerCapture(e.pointerId);
+ };
+ strip.addEventListener('pointerup',release);
+ strip.addEventListener('pointercancel',release);
+ strip.addEventListener('lostpointercapture',e=>{if(e.pointerId===pointer){pointer=null;hovered=false;strip.classList.remove('is-dragging');}});
+ window.addEventListener('blur',()=>{pointer=null;hovered=false;strip.classList.remove('is-dragging');});
+ strip.addEventListener('keydown',e=>{
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+  e.preventDefault();position+=e.key==='ArrowRight'?-100:100;paint();
+ });
+})();
+
+</script>
 </body></html>
+
