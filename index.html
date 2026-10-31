@@ -128,6 +128,65 @@ nav{height:96px;background:linear-gradient(#080b13d9,transparent);padding-block:
 .marquee.is-dragging{cursor:grabbing}
 .marquee .marquee-track{display:flex;width:max-content;will-change:transform}
 .marquee .marquee-group{flex:none;display:block;animation:none!important;padding-right:.35em}
+
+/* Private typography refinement: preserve content, imagery and interaction. */
+.wrap{width:min(1760px,calc(100% - 6vw))}
+.hero-content{min-height:max(800px,100svh);padding-top:132px;padding-bottom:104px}
+.hero h1{font-size:clamp(104px,14vw,220px);line-height:.84;max-width:1080px;letter-spacing:-.075em}
+.hero-lead{font-size:clamp(20px,1.9vw,28px);line-height:1.4;max-width:520px}
+.intro{padding:56px 0 44px}
+.intro h2{font-size:clamp(56px,10.3vw,176px);line-height:.94}
+.intro p{max-width:860px}
+.gallery{padding:56px 0}
+.gallery .section-head h2{font-size:clamp(60px,10.4vw,178px);line-height:.94}
+.gallery .section-head p{max-width:780px}
+.stage-copy{width:47%;max-width:780px;left:4%}
+.stage-copy h3{font-size:clamp(50px,7.2vw,120px);line-height:.97}
+.stage-copy p{max-width:480px}
+.tech h2{font-size:clamp(68px,10.3vw,174px);line-height:.94;max-width:1120px}
+.editorial-service h2{font-size:clamp(58px,7.1vw,120px);line-height:.96}
+.editorial-words{width:86%;max-width:none}
+.editorial-words h2{font-size:clamp(62px,8vw,136px);line-height:.96}
+.faq h2{font-size:clamp(68px,9.3vw,158px);line-height:.98}
+.cta h2{font-size:clamp(82px,13.8vw,232px);line-height:.96;max-width:1680px}
+.eyebrow{line-height:1.5}
+.pill{min-height:48px}
+a:focus-visible,summary:focus-visible,.gallery-grid:focus-visible{outline:2px solid var(--blue);outline-offset:5px}
+@media(min-width:601px) and (max-width:950px){
+ .hero h1{font-size:15.2vw}
+ .stage-copy{width:49%}
+ .editorial-service h2,.editorial-words h2{font-size:clamp(76px,11vw,112px)}
+}
+@media(max-width:600px){
+ .wrap{width:calc(100% - 36px)}
+ .hero-content{min-height:max(760px,100svh);padding-top:284px;padding-bottom:100px}
+ .hero h1{font-size:clamp(64px,21.5vw,124px);line-height:.9;max-width:100%}
+ .hero-lead{font-size:19px;max-width:360px}
+ .intro{padding:40px 0 34px}
+ .intro h2{font-size:clamp(34px,10.8vw,65px);line-height:1;letter-spacing:-.065em}
+ .gallery{padding:40px 0}
+ .gallery .section-head h2{font-size:clamp(40px,12.8vw,77px);line-height:1}
+ .stage-copy{left:18px;bottom:58px;width:calc(100% - 54px)}
+ .stage-copy h3{font-size:clamp(38px,12.6vw,72px);line-height:1}
+ .stage-copy p{font-size:17px;line-height:1.45;max-width:360px}
+ .stage-photo img{object-fit:cover;object-position:63% center}
+ .stage-caption{bottom:20px;right:18px}
+ .tech h2{font-size:clamp(50px,16.6vw,100px);line-height:.98}
+ .editorial-service h2{font-size:clamp(48px,15.6vw,94px);line-height:1}
+ .editorial-words h2{font-size:clamp(48px,16.8vw,100px);line-height:1}
+ .faq h2{font-size:clamp(56px,19.6vw,118px);line-height:1}
+ .cta h2{font-size:clamp(44px,16.8vw,101px);line-height:1}
+ .nav-cta{min-height:44px}
+ .footer{padding-bottom:88px}
+}
+@media(max-width:360px){
+ nav{gap:10px;padding-inline:18px}
+ .logo{font-size:15px;gap:7px}
+ .logo-mark{width:20px;height:20px}
+ .hero-content>.eyebrow{letter-spacing:.1em}
+ .editorial-service{padding-inline:18px}
+ .editorial-service>.pill{font-size:11px;padding-inline:18px;gap:12px}
+}
 </style>
 </head>
 <body>
